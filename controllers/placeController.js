@@ -43,7 +43,11 @@ export const getPlace = async (req, res, next) => {
 }
 export const getAllPlace = async (req, res, next) => {
 	try {
-		const places = await Place.find(req.query).limit(req.query.limit);
+		const { min, max, limit, ...others} = req.query;
+		const places = await Place.find({
+			...others,
+			cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+		}).limit(limit);
 		res.status(200).json(places);
 	}
 	catch (err) {

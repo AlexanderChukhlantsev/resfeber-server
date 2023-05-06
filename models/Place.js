@@ -36,6 +36,9 @@ const PlaceSchema = new mongoose.Schema({
     min: 0,
     max: 5,
   },
+	ratingDesc: {
+    type: String,
+  },
   excursion: {
     type: [String],
   },
