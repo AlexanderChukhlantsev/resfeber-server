@@ -19,4 +19,4 @@ const ExcursionSchema = new mongoose.Schema({
   excursionNumbers: [{number: Number, unavailableDates: {type: [Date]}}],
 }, {timestamps: true});
 
-export default mongoose.model("User", ExcursionSchema)
+export default mongoose.model("Excursion", ExcursionSchema)
