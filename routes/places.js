@@ -1,6 +1,8 @@
 import express from "express";
 import Place from "../models/Place.js";
-import { createPlace, 
+import { countByCity, 
+	countByType, 
+	createPlace, 
 	deletePlace, 
 	getAllPlace, 
 	getPlace, 
@@ -18,9 +20,11 @@ router.put("/:id", verifyAdmin, updatePlace);
 //DELETE
 router.delete("/:id", verifyAdmin, deletePlace);
 //GET
-router.get("/:id", getPlace);
+router.get("/find/:id", getPlace);
 
 //GET ALL
 router.get("/", getAllPlace);
+router.get("/countByCity", countByCity);
+router.get("/countByType", countByType );
 
 export default router;

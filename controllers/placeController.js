@@ -50,3 +50,34 @@ export const getAllPlace = async (req, res, next) => {
 		next(err);
 	}
 }
+export const countByCity = async (req, res, next) => {
+	const cities = req.query.cities.split(",");
+	try {
+		const list = await Promise.all(
+			cities.map((city) => {
+				return Place.countDocuments({ city: city });
+			})
+		);
+		res.status(200).json(list);
+	} catch (err) {
+		next(err);
+	}
+};
+export const countByType = async (req, res, next) => {
+	try {
+		const sightCount = await Place.countDocuments({type: "Достопримечательность"});
+		const museumCount = await Place.countDocuments({type: "Музей"});
+		const galleryCount = await Place.countDocuments({type: "Галерея"});
+		const monumentCount = await Place.countDocuments({type: "Памятник"});
+		const parkCount = await Place.countDocuments({type: "Парк"});
+		res.status(200).json([
+      { type: "Достопримечательность", count: sightCount },
+      { type: "Музей", count: museumCount },
+      { type: "Галерея", count: galleryCount },
+      { type: "Памятник", count: monumentCount },
+      { type: "Парк", count: parkCount },
+    ]);
+	} catch (err) {
+		next(err);
+	}
+};
