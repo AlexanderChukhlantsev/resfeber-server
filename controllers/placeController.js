@@ -43,7 +43,7 @@ export const getPlace = async (req, res, next) => {
 }
 export const getAllPlace = async (req, res, next) => {
 	try {
-		const places = await Place.find();
+		const places = await Place.find(req.query).limit(req.query.limit);
 		res.status(200).json(places);
 	}
 	catch (err) {
@@ -69,13 +69,13 @@ export const countByType = async (req, res, next) => {
 		const museumCount = await Place.countDocuments({type: "Музей"});
 		const galleryCount = await Place.countDocuments({type: "Галерея"});
 		const monumentCount = await Place.countDocuments({type: "Памятник"});
-		const parkCount = await Place.countDocuments({type: "Парк"});
+		const parkCount = await Place.countDocuments({type: "Интересные места"});
 		res.status(200).json([
-      { type: "Достопримечательность", count: sightCount },
-      { type: "Музей", count: museumCount },
-      { type: "Галерея", count: galleryCount },
-      { type: "Памятник", count: monumentCount },
-      { type: "Парк", count: parkCount },
+      { type: "Достопримечательностей", count: sightCount },
+      { type: "Музеев", count: museumCount },
+      { type: "Галерей", count: galleryCount },
+      { type: "Памятников", count: monumentCount },
+      { type: "Интересных мест", count: parkCount },
     ]);
 	} catch (err) {
 		next(err);
