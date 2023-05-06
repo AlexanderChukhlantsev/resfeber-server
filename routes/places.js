@@ -5,17 +5,18 @@ import { createPlace,
 	getAllPlace, 
 	getPlace, 
 	updatePlace } from "../controllers/placeController.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 //CREATE
-router.post("/", createPlace);
+router.post("/", verifyAdmin, createPlace);
 
 //UPDATE
-router.put("/:id", updatePlace);
+router.put("/:id", verifyAdmin, updatePlace);
 
 //DELETE
-router.delete("/:id", deletePlace);
+router.delete("/:id", verifyAdmin, deletePlace);
 //GET
 router.get("/:id", getPlace);
 
