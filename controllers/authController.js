@@ -2,9 +2,14 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
+import { validationResult } from "express-validator";
 
 export const register = async (req, res, next) => {
 	try {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return next(createError(400, "Ошибка валидации!"));
+		}
 		const salt = bcrypt.genSaltSync(10);
 		const hash = bcrypt.hashSync(req.body.password, salt);
 		const newUser = new User({
@@ -12,8 +17,12 @@ export const register = async (req, res, next) => {
 			email: req.body.email,
 			password: hash,
 		})
+		const user = await User.findOne({username: req.body.username});
+		if (user) return next(createError(404, "Юзер с таким именем уже есть!"));
+		const email = await User.findOne({email: req.body.email});
+		if (email) return next(createError(404, "Юзер с таким email уже есть!"));
 		await newUser.save()
-		res.status(200).send("Юзер был создан");
+		res.status(200).send("Юзер был создан!");
 	}
 	catch (err) {
 		next(err);
@@ -23,7 +32,7 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
 	try {
 		const user = await User.findOne({username: req.body.username});
-		if (!user) return next(createError(404, "Юзер небыл найден!"));
+		if (!user) return next(createError(404, "Юзер не был найден!"));
 		const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);
 		if (!isPasswordCorrect) 
 			return next(createError(400, "Неверный пароль или имя пользователя!"));
@@ -37,4 +46,4 @@ export const login = async (req, res, next) => {
 	catch (err) {
 		next(err);
 	}
-} 
+}
