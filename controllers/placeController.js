@@ -76,11 +76,11 @@ export const countByType = async (req, res, next) => {
 		const monumentCount = await Place.countDocuments({type: "Памятник"});
 		const parkCount = await Place.countDocuments({type: "Интересные места"});
 		res.status(200).json([
-      { type: "Достопримечательностей", count: sightCount },
-      { type: "Музеев", count: museumCount },
-      { type: "Галерей", count: galleryCount },
-      { type: "Памятников", count: monumentCount },
-      { type: "Интересных мест", count: parkCount },
+      { titleType: "Достопримечательности", type: "Достопримечательностей", count: sightCount },
+      { titleType: "Музеи", type: "Музеев", count: museumCount },
+      { titleType: "Галереи", type: "Галерей", count: galleryCount },
+      { titleType: "Памятники", type: "Памятников", count: monumentCount },
+      { titleType: "Интересные места", type: "Интересных мест", count: parkCount },
     ]);
 	} catch (err) {
 		next(err);
