@@ -4,7 +4,8 @@ import { createExcursion,
 	deleteExcursion, 
 	getAllExcursion, 
 	getExcursion, 
-	updateExcursion } from "../controllers/excursionController.js";
+	updateExcursion, 
+	updateExcursionAvailability} from "../controllers/excursionController.js";
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.post("/:placeid", verifyAdmin, createExcursion);
 
 //UPDATE
 router.put("/:id", verifyAdmin, updateExcursion);
+router.put("/availability/:id", updateExcursionAvailability);
 
 //DELETE
 router.delete("/:id/:placeid", verifyAdmin, deleteExcursion);

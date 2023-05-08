@@ -1,4 +1,5 @@
 import Place from "../models/Place.js";
+import Excursion from "../models/Excursion.js";
 
 export const createPlace = async (req, res, next) => {
 	const newPlace = new Place(req.body);
@@ -84,4 +85,17 @@ export const countByType = async (req, res, next) => {
 	} catch (err) {
 		next(err);
 	}
+};
+export const getPlaceExcursions = async (req, res, next) => {
+  try {
+    const place = await Place.findById(req.params.id);
+    const list = await Promise.all(
+      place.excursion.map((excursion) => {
+        return Excursion.findById(excursion);
+      })
+    );
+    res.status(200).json(list)
+  } catch (err) {
+    next(err);
+  }
 };

@@ -31,6 +31,21 @@ export const updateExcursion = async (req, res, next) => {
 		next(err);
 	}
 }
+export const updateExcursionAvailability = async (req, res, next) => {
+  try {
+    await Excursion.updateOne(
+      { "excursionNumbers._id": req.params.id },
+      {
+        $push: {
+          "excursionNumbers.$.unavailableDates": req.body.dates
+        },
+      }
+    );
+    res.status(200).json("Экскурсия была обновлена.");
+  } catch (err) {
+    next(err);
+  }
+};
 export const deleteExcursion = async (req, res, next) => {
 	const placeId = req.params.placeid;
 	try {
