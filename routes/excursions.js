@@ -17,7 +17,7 @@ router.put("/:id", verifyAdmin, updateExcursion);
 router.put("/availability/:id", updateExcursionAvailability);
 
 //DELETE
-router.delete("/:id/:placeid", verifyAdmin, deleteExcursion);
+router.delete("/:id", verifyAdmin, deleteExcursion);
 
 //GET
 router.get("/:id", getExcursion); 
