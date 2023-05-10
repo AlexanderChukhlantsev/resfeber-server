@@ -57,7 +57,7 @@ export const deleteExcursion = async (req, res, next) => {
 		} catch (err) {
 			next(err);
 		}
-		res.status(200).json("Место было удалено");
+		res.status(200).json("Экскурсия была удалена");
 	}
 	catch (err) {
 		next(err);
