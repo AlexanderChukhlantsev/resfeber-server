@@ -9,7 +9,20 @@ import cookieParser from "cookie-parser";
 import cors from 'cors';
 // const cors = require('cors');
 const app = express();
-app.use(cors());
+const options = {
+  allowedHeaders: [
+    'Origin',
+    'X-Requested-With',
+    'Content-Type',
+    'Accept',
+    'X-Access-Token',
+  ],
+  credentials: true,
+  methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+  origin: "https://resfeber-server.onrender.com/api",
+  preflightContinue: false,
+};
+app.use(cors(options));
 dotenv.config();
 
 const connect = async ()=>{
