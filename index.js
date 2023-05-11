@@ -19,7 +19,7 @@ const options = {
   ],
   credentials: true,
   methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-  origin: "https://resfeber-server.onrender.com/api",
+  origin: "https://resfeber-server.onrender.com",
   preflightContinue: false,
 };
 app.use(cors(options));
