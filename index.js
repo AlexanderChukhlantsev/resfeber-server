@@ -6,10 +6,10 @@ import placesRoute from "./routes/places.js";
 import usersRoute from "./routes/users.js";
 import excursionsRoute from "./routes/excursions.js";
 import cookieParser from "cookie-parser";
+import * as cors from 'cors';
 
 const app = express();
 dotenv.config();
-const cors = require('cors');
 app.use(cors());
 
 const connect = async ()=>{
