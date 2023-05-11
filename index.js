@@ -6,23 +6,8 @@ import placesRoute from "./routes/places.js";
 import usersRoute from "./routes/users.js";
 import excursionsRoute from "./routes/excursions.js";
 import cookieParser from "cookie-parser";
-import cors from 'cors';
-// const cors = require('cors');
+
 const app = express();
-const options = {
-  allowedHeaders: [
-    'Origin',
-    'X-Requested-With',
-    'Content-Type',
-    'Accept',
-    'X-Access-Token',
-  ],
-  credentials: true,
-  methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-  origin: "https://resfeber-server.onrender.com",
-  preflightContinue: false,
-};
-app.use(cors(options));
 dotenv.config();
 
 const connect = async ()=>{
@@ -30,7 +15,7 @@ const connect = async ()=>{
 		await mongoose.connect(process.env.MONGO_URL);
 		console.log("Connected to MongoDB!");
 	} catch (error) {
-		throw error;  
+		throw error;
 	}
 };
 
