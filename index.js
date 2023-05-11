@@ -6,11 +6,11 @@ import placesRoute from "./routes/places.js";
 import usersRoute from "./routes/users.js";
 import excursionsRoute from "./routes/excursions.js";
 import cookieParser from "cookie-parser";
-import * as cors from 'cors';
-
+import cors from 'cors';
+// const cors = require('cors');
 const app = express();
-dotenv.config();
 app.use(cors());
+dotenv.config();
 
 const connect = async ()=>{
 	try {
