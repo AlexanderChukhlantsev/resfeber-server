@@ -1,6 +1,6 @@
 import express from "express";
-import Place from "../models/Place.js";
-import { countByCity, 
+import { countAll, 
+	countByCity, 
 	countByType, 
 	createPlace, 
 	deletePlace, 
@@ -28,5 +28,6 @@ router.get("/", getAllPlace);
 router.get("/countByCity", countByCity);
 router.get("/countByType", countByType);
 router.get("/excursion/:id", getPlaceExcursions);
+router.get("/countAll", verifyAdmin, countAll);
 
 export default router;

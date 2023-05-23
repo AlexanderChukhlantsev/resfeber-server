@@ -11,7 +11,7 @@ export const createPlace = async (req, res, next) => {
 	catch (err) {
 		next(err);
 	}
-}
+};
 export const updatePlace = async (req, res, next) => {
 	try {
 		const updatePlace = await Place.findByIdAndUpdate(
@@ -23,7 +23,7 @@ export const updatePlace = async (req, res, next) => {
 	catch (err) {
 		next(err);
 	}
-}
+};
 export const deletePlace = async (req, res, next) => {
 	try {
 		await Place.findByIdAndDelete(req.params.id);
@@ -32,7 +32,7 @@ export const deletePlace = async (req, res, next) => {
 	catch (err) {
 		next(err);
 	}
-}
+};
 export const getPlace = async (req, res, next) => {
 	try {
 		const place = await Place.findById(req.params.id);
@@ -41,7 +41,7 @@ export const getPlace = async (req, res, next) => {
 	catch (err) {
 		next(err);
 	}
-}
+};
 export const getAllPlace = async (req, res, next) => {
 	try {
 		const { min, max, limit, ...others} = req.query;
@@ -54,7 +54,7 @@ export const getAllPlace = async (req, res, next) => {
 	catch (err) {
 		next(err);
 	}
-}
+};
 export const countByCity = async (req, res, next) => {
 	const cities = req.query.cities.split(",");
 	try {
@@ -82,6 +82,16 @@ export const countByType = async (req, res, next) => {
       { titleType: "Памятники", type: "Памятников", count: monumentCount },
       { titleType: "Интересные места", type: "Интересных мест", count: parkCount },
     ]);
+	} catch (err) {
+		next(err);
+	}
+};
+export const countAll = async (req, res, next) => {
+	try {
+		const allCount = await Place.countDocuments({});
+		res.status(200).json(
+			{ count: allCount }
+		);
 	} catch (err) {
 		next(err);
 	}

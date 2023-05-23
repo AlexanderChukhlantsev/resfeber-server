@@ -39,3 +39,13 @@ export const getAllUser = async (req, res, next) => {
 		next(err);
 	}
 }
+export const countAll = async (req, res, next) => {
+	try {
+		const allCount = await User.countDocuments({});
+		res.status(200).json(
+			{ count: allCount }
+		);
+	} catch (err) {
+		next(err);
+	}
+};

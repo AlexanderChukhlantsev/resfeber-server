@@ -1,13 +1,26 @@
 import express from "express";
 import { verifyAdmin } from "../utils/verifyToken.js";
-import { createExcursion, 
+import { countAll, 
+	countUnavailableDates, 
+	createExcursion, 
 	deleteExcursion, 
 	getAllExcursion, 
+	getAllUnavailableDates, 
 	getExcursion, 
+	getExcursionData, 
+	getOccupancyPercentage, 
 	updateExcursion, 
 	updateExcursionAvailability} from "../controllers/excursionController.js";
 
 const router = express.Router();
+
+//GET ALL
+router.get("/countAll", verifyAdmin, countAll);
+router.get("/countUnavailableDates", verifyAdmin, countUnavailableDates);
+router.get("/unavailableDates", verifyAdmin, getAllUnavailableDates);
+router.get("/occupancyPercentage", verifyAdmin, getOccupancyPercentage);
+router.get("/getExcursionData", verifyAdmin, getExcursionData);
+router.get("/", getAllExcursion);
 
 //CREATE
 router.post("/:placeid", verifyAdmin, createExcursion);
@@ -21,10 +34,7 @@ router.delete("/:id", verifyAdmin, deleteExcursion);
 router.delete("/:placeid/:id", verifyAdmin, deleteExcursion);
 
 //GET
-router.get("/:id", getExcursion); 
-
-//GET ALL
-router.get("/", getAllExcursion);
+router.get("/:id", getExcursion);
 
 
 export default router
