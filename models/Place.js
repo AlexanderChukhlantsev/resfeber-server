@@ -50,6 +50,8 @@ const PlaceSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-});
+},
+{ timestamps: true }
+);
 
 export default mongoose.model("Place", PlaceSchema)

@@ -181,3 +181,15 @@ export const getExcursionData = async (req, res, next) => {
     next(err);
   }
 };
+export const getPlaceIds = async (req, res, next) => {
+  const { excursionId } = req.params;
+
+  try {
+    const places = await Place.find({ excursion: excursionId }, '_id');
+    const placeIds = places.map(place => place._id);
+
+    res.status(200).json({ placeIds });
+  } catch (err) {
+    next(err);
+  }
+};

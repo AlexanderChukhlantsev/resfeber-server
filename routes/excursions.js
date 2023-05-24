@@ -9,6 +9,7 @@ import { countAll,
 	getExcursion, 
 	getExcursionData, 
 	getOccupancyPercentage, 
+	getPlaceIds, 
 	updateExcursion, 
 	updateExcursionAvailability} from "../controllers/excursionController.js";
 
@@ -20,6 +21,7 @@ router.get("/countUnavailableDates", verifyAdmin, countUnavailableDates);
 router.get("/unavailableDates", verifyAdmin, getAllUnavailableDates);
 router.get("/occupancyPercentage", verifyAdmin, getOccupancyPercentage);
 router.get("/getExcursionData", verifyAdmin, getExcursionData);
+router.get("/getPlaceIds/:excursionId", verifyAdmin, getPlaceIds);
 router.get("/", getAllExcursion);
 
 //CREATE
